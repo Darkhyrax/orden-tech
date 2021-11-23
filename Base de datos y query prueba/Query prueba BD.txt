@@ -1,0 +1,14 @@
+Select DATE_FORMAT(orders.created_at, "%d-%m-%Y %h:%i%p") as fecha_orden,
+numero_orden,
+monto,
+estado,
+articulos.nombre as articulo,
+cantidad,
+order_details.precio,
+total,
+concat(name,' ',last_name) as usuario
+from orders
+inner join estados on estados.id = orders.estado_id
+inner join order_details on order_details.order_id = orders.id
+inner join articulos on articulos.id = order_details.articulo_id
+inner join users on users.id = orders.user_id;
